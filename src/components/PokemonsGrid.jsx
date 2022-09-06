@@ -1,15 +1,10 @@
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import PokemonsCard from "./PokemonsCard";
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default function PokemonsGrid() {
-  const {
-    singlePokemon,
-    search,
-    pokemons,
-    offsetPageNumber,
-    setOffsetPageNumber,
-  } = useGlobalContext();
+  const { singlePokemon, search, pokemons, setOffsetPageNumber } =
+    useGlobalContext();
 
   const results = !search
     ? singlePokemon
@@ -19,21 +14,18 @@ export default function PokemonsGrid() {
           .toLowerCase()
           .includes(search.replace(/\s+/g, "").toLowerCase())
       );
-  console.log(pokemons.next != null ? "true" : "false");
+
   return (
     <div>
       <InfiniteScroll
-        dataLength={pokemons.results.length}
-        hasMore={pokemons.next != null ? true : false}
-        next={() => {
+        pageStart={0}
+        //dataLength={pokemons.results.length}
+        hasMore={pokemons.next ? true : false}
+        initialLoad={false}
+        loadMore={() => {
           setOffsetPageNumber((prev) => prev + 400);
         }}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p className="text-2xl">
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+        loader={<h4 className="text-3xl font-semibold">Cargando...</h4>}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 lg:gap-20"
       >
         {results.length !== 0 ? (

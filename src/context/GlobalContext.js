@@ -8,7 +8,9 @@ const GlobalContextProvider = ({ children }) => {
   const API = "https://pokeapi.co/api/v2/";
   const [offsetPageNumber, setOffsetPageNumber] = useState(0);
 
-  const { data: pokemons } = useSWR(API + `pokemon?limit=400&offset=${offsetPageNumber}`);
+  const { data: pokemons } = useSWR(
+    API + `pokemon?limit=400&offset=${offsetPageNumber}`
+  );
 
   const [singlePokemon, setSinglePokemon] = useState([]);
 
@@ -21,9 +23,16 @@ const GlobalContextProvider = ({ children }) => {
   }, [pokemons.results]);
 
   const [search, setSearch] = useState("");
-  console.log(pokemons)
 
-  const data = { pokemons, singlePokemon, API, search, setSearch, offsetPageNumber, setOffsetPageNumber };
+  const data = {
+    pokemons,
+    singlePokemon,
+    API,
+    search,
+    setSearch,
+    offsetPageNumber,
+    setOffsetPageNumber,
+  };
   return (
     <GlobalContext.Provider value={data}>{children}</GlobalContext.Provider>
   );
