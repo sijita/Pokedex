@@ -19,7 +19,6 @@ export default function PokemonsGrid() {
     <div>
       <InfiniteScroll
         pageStart={0}
-        //dataLength={pokemons.results.length}
         hasMore={pokemons.next ? true : false}
         initialLoad={false}
         loadMore={() => {
