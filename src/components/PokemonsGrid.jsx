@@ -1,29 +1,10 @@
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import PokemonsCard from "./PokemonsCard";
 import { typeBackgroundColor } from "../constants/pokemonTypeColor";
-import { useEffect } from "react";
 
 export default function PokemonsGrid() {
-  const { allPokemons, search, setReachedBottom } = useGlobalContext();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, clientHeight, scrollHeight } =
-        document.documentElement;
-
-      if (scrollHeight - scrollTop === clientHeight) {
-        setReachedBottom(true);
-      } else {
-        setReachedBottom(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const { allPokemons, search, offsetPageNumber, setOffsetPageNumber } =
+    useGlobalContext();
 
   const results = !search
     ? allPokemons
@@ -66,6 +47,12 @@ export default function PokemonsGrid() {
           }
         />
       ))}
+      <button
+        className="btn bg-white text-black hover:bg-white/50 hover:text-white col-span-4"
+        onClick={() => setOffsetPageNumber(offsetPageNumber + 50)}
+      >
+        Cargar más
+      </button>
     </div>
   );
 }
