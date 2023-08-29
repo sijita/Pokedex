@@ -23,7 +23,6 @@ const GlobalContextProvider = ({ children }) => {
 
             setAllPokemons((prev) => [...prev, res.data]);
           } catch (error) {
-            console.log(error);
             console.error("Error fetching Pokemon:", error);
           }
         }

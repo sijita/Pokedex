@@ -48,7 +48,7 @@ export default function PokemonsGrid() {
         />
       ))}
       <button
-        className="btn bg-white text-black hover:bg-white/50 hover:text-white col-span-4"
+        className="btn bg-white text-black hover:bg-white/50 hover:text-white col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4"
         onClick={() => setOffsetPageNumber(offsetPageNumber + 50)}
       >
         Cargar más
